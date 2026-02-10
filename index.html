@@ -58,6 +58,42 @@
 
 
 
+  <!-- form -->
+  <div id="task-form-overlay">
+    <form id="task-form">
+
+
+      <label>title</label>
+      <input type="text" id="taskInput" placeholder="Type your task here...">
+
+
+
+      <label for="taskPriority">Select Priority:</label>
+      <select class="form-select" aria-label="Priority selection" id="taskPriority">
+        <option selected disabled>Choose priority</option>
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+      </select>
+
+
+
+      <label for="taskDeadline" class="form-label">Select Deadline:</label>
+      <input type="date" class="form-control" id="taskDeadline" name="taskDeadline">
+
+
+
+      <button type="submit" class="btn btn-primary" id="Summit-task">Add Task</button>
+      <button type="button" class="btn btn-secondary" id="cancel-btn">Cancel</button>
+
+
+    </form>
+  </div>
+
+
+
+
+
 
 
 
