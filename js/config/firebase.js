@@ -4,7 +4,6 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/12.9.0/firebase
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAEZ9BeLYTH2bV7EgEio-BJXyCUdLijehQ",
   authDomain: "mindflow-38a78.firebaseapp.com",

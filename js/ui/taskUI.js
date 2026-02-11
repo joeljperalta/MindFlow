@@ -20,6 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
               Priority: <span class="badge ${badgeClass}">${task.priority}</span>
             </p>
             <p class="card-text">Due: <strong>${task.dueDate}</strong></p>
+                 <button class="btn btn-sm btn-outline-secondary me-2 complete-btn">Complete</button>
+            <button class="btn btn-sm btn-outline-danger delete-btn">Delete</button>
           </div>
         </div>
       `;
