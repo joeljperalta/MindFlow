@@ -1,3 +1,5 @@
+import { addTaskToFirestore } from "../services/taskService.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   ///* UI Elements *///
   const cancelBtn = document.getElementById("cancel-btn");
@@ -43,36 +45,27 @@ document.addEventListener("DOMContentLoaded", () => {
     taskFormOverlay.style.display = "none";
   }
 
+  title.addEventListener("blur", () => {
+    if (title.value.trim() !== "") {
+      title.classList.add("is-valid");
+    } else {
+      title.classList.remove("is-valid");
+    }
+  });
+
   // Handle form submission
-  summitTaskBtn.addEventListener("click", (e) => {
+
+  summitTaskBtn.addEventListener("click", async (e) => {
     e.preventDefault();
 
-    let badgeClass;
-    if (priority.value === "High") badgeClass = "bg-danger";
-    else if (priority.value === "Medium") badgeClass = "bg-warning text-dark";
-    else badgeClass = "bg-success";
+    const task = {
+      title: title.value,
+      priority: priority.value,
+      dueDate: dueDate.value,
+      completed: false,
+    };
 
-    const cardHtml = `
-    <div class="card mb-3 shadow-sm">
-        <div class="card-body">
-            <h5 class="card-title">${title.value}</h5>
-            <p class="card-text">
-            Priority: <span class="badge ${badgeClass}">${priority.value}</span></p>
-
-            <p class="card-text">Due: <strong>${dueDate.value}</strong></p>
-            <button class="btn btn-sm btn-outline-secondary me-2 complete-btn">Complete</button>
-            <button class="btn btn-sm btn-outline-danger delete-btn">Delete</button>
-        </div>
-    </div>
-    `;
-
-    cardContainer.append(
-      document.createRange().createContextualFragment(cardHtml),
-    );
-
+    await addTaskToFirestore(task);
     hideForm();
-    title.value = "";
-    priority.value = "";
-    dueDate.value = "";
   });
 });
