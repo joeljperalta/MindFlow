@@ -1,52 +1,57 @@
+document.addEventListener("DOMContentLoaded", () => {
+  ///* UI Elements *///
+  const cancelBtn = document.getElementById("cancel-btn");
+  const addTaskBtn = document.getElementById("add-task-btn");
+  const summitTaskBtn = document.getElementById("Summit-task");
+  const taskFormOverlay = document.getElementById("task-form-overlay");
 
-document.addEventListener('DOMContentLoaded', () => {
+  //* Form Inputs *///
+  const title = document.getElementById("taskInput");
+  const priority = document.getElementById("taskPriority");
+  const dueDate = document.getElementById("taskDeadline");
 
+  //* Card Container *///
+  const cardContainer = document.getElementById("Card-Container");
 
-const addTaskBtn = document.getElementById('add-task-btn');
-const taskFormOverlay = document.getElementById('task-form-overlay');
+  // Initialize Bootstrap Offcanvas
+  const sidebarEl = document.getElementById("sidebar");
+  const sidebar = new bootstrap.Offcanvas(sidebarEl);
 
+  // Event Listeners
 
-addTaskBtn.addEventListener('click', (e) => {
+  addTaskBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    taskFormOverlay.style.display = 'flex';
+    showForm();
+  });
 
-});
+  cancelBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    hideForm();
+  });
 
-const sidebarEl = document.getElementById('sidebar');
-const sidebar = new bootstrap.Offcanvas(sidebarEl);
-
-sidebarEl.addEventListener('click', (e) => {
+  sidebarEl.addEventListener("click", (e) => {
     if (taskFormOverlay.style.display === "flex") {
-        sidebar.hide();
+      sidebar.hide();
     }
-});
+  });
 
-const cancelBtn = document.getElementById('cancel-btn');
-cancelBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    taskFormOverlay.style.display = 'none';
-});
+  function showForm() {
+    taskFormOverlay.style.display = "flex";
+  }
 
+  function hideForm() {
+    taskFormOverlay.style.display = "none";
+  }
 
-
-
-const title = document.getElementById('taskInput');
-const priority = document.getElementById('taskPriority');
-const dueDate = document.getElementById('taskDeadline');
-
-
-const summitTaskBtn = document.getElementById('Summit-task');
-const cardContainer = document.getElementById('Card-Container');
-
-summitTaskBtn.addEventListener('click', (e) => {
+  // Handle form submission
+  summitTaskBtn.addEventListener("click", (e) => {
     e.preventDefault();
 
     let badgeClass;
-    if (priority.value === 'High') badgeClass = 'bg-danger';
-    else if(priority.value === 'Medium') badgeClass = 'bg-warning text-dark';
-    else badgeClass = 'bg-success';
+    if (priority.value === "High") badgeClass = "bg-danger";
+    else if (priority.value === "Medium") badgeClass = "bg-warning text-dark";
+    else badgeClass = "bg-success";
 
-    
     const cardHtml = `
     <div class="card mb-3 shadow-sm">
         <div class="card-body">
@@ -61,16 +66,13 @@ summitTaskBtn.addEventListener('click', (e) => {
     </div>
     `;
 
-   cardContainer.append(document.createRange().createContextualFragment(cardHtml));
+    cardContainer.append(
+      document.createRange().createContextualFragment(cardHtml),
+    );
 
-    
-    taskFormOverlay.style.display = 'none';
-    title.value = '';
-    priority.value = '';
-    dueDate.value = '';
-
+    hideForm();
+    title.value = "";
+    priority.value = "";
+    dueDate.value = "";
+  });
 });
-
-
-});
-
