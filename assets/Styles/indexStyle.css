@@ -1,4 +1,8 @@
 
+.navbar {
+    z-index: 1100;
+}
+
 .fa-spin-slower{
     animation: fa-spin 4s linear infinite;
 }
@@ -22,7 +26,7 @@
     width: 100%;
     height: 100%;
     background: rgba(0,0,0,0.5);
-
+    display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
@@ -37,3 +41,21 @@
     width: 300px;
 }
 
+
+#Card-Container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: 160px; 
+  padding: 0 1rem; 
+}
+
+
+#Card-Container .card{
+ flex: 0 0 45%;             
+  max-width: 400px;        
+  min-width: 250px;        
+  margin-bottom: 1rem; 
+}
