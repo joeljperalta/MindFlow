@@ -8,17 +8,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const cardProgress = document.getElementById("Card-Progress");
   const cardCompleted = document.getElementById("Card-Completed");
 
-  // Index page only shows waiting tasks //
+  const cardContainer = document.getElementById("Card-Container");
 
+  function getPriority(priority) {
+    if (priority === "High") return "bg-danger";
+    else if (priority === "Medium") return "bg-warning text-dark";
+    else return "bg-success";
+  }
+
+  // Index page only shows waiting tasks //
   listenTasksRealtime((tasks) => {
     const waitingTasks = tasks.filter((task) => task.status === "waiting");
 
     cardWaiting.innerHTML = "";
     waitingTasks.forEach((task) => {
-      let badgeClass;
-      if (task.priority === "High") badgeClass = "bg-danger";
-      else if (task.priority === "Medium") badgeClass = "bg-warning text-dark";
-      else badgeClass = "bg-success";
+      const badgeClass = getPriority(task.priority);
 
       const cardHtml = `
         <div class="card mb-3 shadow-sm">
@@ -41,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Progress page shows in-progress tasks //
-
   listenTasksRealtime((tasks) => {
     const inProgressTasks = tasks.filter(
       (task) => task.status === "in-progress",
@@ -49,10 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cardProgress.innerHTML = "";
 
     inProgressTasks.forEach((task) => {
-      let badgeClass;
-      if (task.priority === "High") badgeClass = "bg-danger";
-      else if (task.priority === "Medium") badgeClass = "bg-warning text-dark";
-      else badgeClass = "bg-success";
+      const badgeClass = getPriority(task.priority);
 
       const cardHtml = `
         <div class="card mb-3 shadow-sm">
@@ -75,15 +75,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Completed page shows completed tasks //
   listenTasksRealtime((tasks) => {
     const completedTasks = tasks.filter((task) => task.status === "completed");
     cardCompleted.innerHTML = "";
 
     completedTasks.forEach((task) => {
-      let badgeClass;
-      if (task.priority === "High") badgeClass = "bg-danger";
-      else if (task.priority === "Medium") badgeClass = "bg-warning text-dark";
-      else badgeClass = "bg-success";
+      const badgeClass = getPriority(task.priority);
 
       const cardHtml = `
         <div class="card mb-3 shadow-sm">
