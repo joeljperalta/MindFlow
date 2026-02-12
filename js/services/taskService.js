@@ -3,6 +3,8 @@ import {
   collection,
   addDoc,
   onSnapshot,
+  doc,
+  updateDoc,
 } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
 
 export async function addTaskToFirestore(task) {
@@ -19,4 +21,8 @@ export function listenTasksRealtime(callback) {
     }));
     callback(tasks);
   });
+}
+
+export async function updateTaskInFirestore(taskId, updates) {
+  await updateDoc(doc(db, "tasks", taskId), updates);
 }
